@@ -9,22 +9,8 @@ def exibir_matriz(matriz):
         print('  '.join(str(num) for num in linha))
 
 intervalos = ((1, 10), (11, 20), (21, 30), (31, 40))
-
-
-def verificação_dezena(nivel, matriz, niveis):
-    colunas = niveis[nivel]["colunas"]
-    num_sorteado = random.randint(1, colunas * 10)
-    for i in range(len(matriz)):
-        for j in range(len(matriz[i])):
-            if matriz[i][j] == num_sorteado:
-                matriz[i][j] = f'({matriz[i][j]})' 
-    return matriz 
-        
-                    
-
-
-
-def criar_cartekas(nivel):
+     
+def criar_cartelas(nivel):
     matriz = []
     usados = []
     for i in range(niveis[nivel]["linhas"]):
@@ -40,24 +26,22 @@ def criar_cartekas(nivel):
             else:
                 linha.append(num)
         matriz.append(linha)  
-    exibir_matriz(matriz) 
+    return matriz
+
+def sortear_numero(nivel):
+    config = niveis[nivel]
+    colunas= config["colunas"]*10
+    numSorted= random.randint(1,colunas)
+    print(numSorted)
 
 def jogo(nivel):
     config = niveis[nivel]
-    for c in range(1, config["players"] + 1):
-        print(f"Jogador {c}")
-        criar_cartekas(nivel)
-        verificação_dezena(nivel,matriz=exibir_matriz,niveis=len(exibir_matriz))
-        
+    while True:
+        for c in range(1, config["players"] + 1):
+            print(f"Jogador(a) {c}")
+            matriz = criar_cartelas(nivel)  
+            exibir_matriz(matriz)
+        sortear_numero(nivel)
+        break
 
-
-jogo(0)
-
-
-
-
-
-
-
-
-
+jogo(1)
